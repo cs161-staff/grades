@@ -5,8 +5,8 @@ type Assignment struct {
 	// Name is the name of the assignment.
 	Name string
 
-	// Category is the category belonging to the assignment.
-	Category *Category
+	// CategoryName is the name of the category belonging to the assignment.
+	CategoryName string
 
 	// MaxScore is the maxinum raw score that can be received on this
 	// assignment.
