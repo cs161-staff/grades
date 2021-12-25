@@ -23,9 +23,31 @@ type AssignmentSubmission struct {
 	// Dropped is whether the assignment was dropped.
 	Dropped bool
 
-	// Override is the overridden raw score for the assignment, if non-nil.
-	Override *float64
+	// HasOverride is whether Override is present.
+	hasOverride bool
+
+	// Override is the overridden raw score for the assignment, if HasOverride
+	// is true.
+	override float64
 
 	// Comments is the human-readable comments on this submission.
 	Comments []string
+}
+
+// Override returns the overridden raw score of the assignment and whether it
+// is present.
+func (s *AssignmentSubmission) Override() (float64, bool) {
+	return s.override, s.hasOverride
+}
+
+// SetOverride sets the overridden raw score of the assignment.
+func (s *AssignmentSubmission) SetOverride(newOverride float64) {
+	s.hasOverride = true
+	s.override = newOverride
+}
+
+// ClearOverride clears the overridden raw score.
+func (s *AssignmentSubmission) ClearOverride() {
+	s.hasOverride = false
+	s.override = 0.0
 }

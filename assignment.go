@@ -18,9 +18,9 @@ type Assignment struct {
 	Weight float64
 
 	// Slip group is the group of assignemnts that this assignment is a part
-	// of. Slip days are applied to a whole group. If nil, no slip days can be
+	// of. Slip days are applied to a whole group. If -1, no slip days can be
 	// applied to this assignment.
-	SlipGroup *int
+	SlipGroup int
 
 	// Grade is the submission present on the assignment, if any.
 	Grade *AssignmentSubmission

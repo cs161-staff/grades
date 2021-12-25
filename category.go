@@ -24,9 +24,31 @@ type Category struct {
 	// late assignments are automatically treated as 0.
 	HasLateMultiplier bool
 
-	// Override is the overridden weighted score of this category, if non-nil.
-	Override *float64
+	// HasOverride is whether Override is present.
+	hasOverride bool
+
+	// Override is the overridden weighted score of this category, if
+	// HasOverride is true.
+	override float64
 
 	// Comments is the human-readable comments added to this category.
 	Comments []string
+}
+
+// Override returns the overridden weighted score of the category and whether
+// it is present.
+func (c *Category) Override() (float64, bool) {
+	return c.override, c.hasOverride
+}
+
+// SetOverride sets the overridden weighted score of the category.
+func (c *Category) SetOverride(newOverride float64) {
+	c.hasOverride = true
+	c.override = newOverride
+}
+
+// ClearOverride clears the overridden weighted score.
+func (c *Category) ClearOverride() {
+	c.hasOverride = false
+	c.override = 0.0
 }
