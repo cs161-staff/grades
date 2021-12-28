@@ -115,7 +115,7 @@ func getSlipPossibilities(latenesses map[int]time.Duration, slipDays int) []map[
 		}
 		allPossibilities := make([]map[int]int, 0)
 		for slips := 0; slips <= maxSlip; slips++ {
-			slipPossibilities := helper(groups, index + 1, daysLeft - slips)
+			slipPossibilities := helper(groups, index+1, daysLeft-slips)
 			for i := range slipPossibilities {
 				slipPossibilities[i][curGroup] = slips
 			}
@@ -129,14 +129,14 @@ func getSlipPossibilities(latenesses map[int]time.Duration, slipDays int) []map[
 }
 
 // Returns the cross product of the given slices.
-func crossProduct(slices... []map[int]int) [][]map[int]int {
+func crossProduct(slices ...[]map[int]int) [][]map[int]int {
 	if len(slices) == 0 {
 		return [][]map[int]int{}
 	}
 
 	// Get length of the cross product so that allocation can be done at once.
 	crossLen := 1
-	for _, slice := range(slices) {
+	for _, slice := range slices {
 		crossLen *= len(slice)
 	}
 
@@ -145,17 +145,17 @@ func crossProduct(slices... []map[int]int) [][]map[int]int {
 	cross := make([][]map[int]int, 0, crossLen)
 	for indices[0] < len(slices[0]) {
 		next := make([]map[int]int, len(slices))
-		for i := range(slices) {
+		for i := range slices {
 			next[i] = slices[i][indices[i]]
 		}
 		cross = append(cross, next)
 
 		// Increment indices from right to left.
-		indices[len(indices) - 1]++
+		indices[len(indices)-1]++
 		for i := len(indices) - 1; i >= 1; i-- {
 			if indices[i] >= len(slices[i]) {
 				indices[i] = 0
-				indices[i - 1]++
+				indices[i-1]++
 			}
 		}
 	}
