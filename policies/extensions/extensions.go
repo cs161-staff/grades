@@ -16,9 +16,9 @@ func Make(extensions map[int]map[string]int) grades.Policy {
 		if !ok {
 			return []*grades.Student{student}
 		}
-		newStudent := &*student
+		newStudent := student.CloneWithAssignments()
 		for assignmentName, extensionDays := range studentExtensions {
-			newAssignment := &*newStudent.Assignments[assignmentName]
+			newAssignment := newStudent.Assignments[assignmentName].Clone()
 			newAssignment.Grade.Lateness -= time.Hour * 24 * time.Duration(extensionDays)
 			newStudent.Assignments[assignmentName] = newAssignment
 		}

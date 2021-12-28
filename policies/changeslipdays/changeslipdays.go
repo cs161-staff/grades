@@ -14,9 +14,9 @@ func Make(slipDaysAdjust map[int]map[string]int) grades.Policy {
 		if !ok {
 			return []*grades.Student{student}
 		}
-		newStudent := &*student
+		newStudent := student.CloneWithCategories()
 		for categoryName, change := range changes {
-			newCategory := &*newStudent.Categories[categoryName]
+			newCategory := newStudent.Categories[categoryName].Clone()
 			newCategory.SlipDays += change
 			newStudent.Categories[categoryName] = newCategory
 		}

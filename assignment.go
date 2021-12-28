@@ -22,6 +22,14 @@ type Assignment struct {
 	// applied to this assignment.
 	SlipGroup int
 
-	// Grade is the submission present on the assignment, if any.
-	Grade *AssignmentSubmission
+	// Grade is the submission present on the assignment.
+	Grade AssignmentSubmission
+}
+
+// Clone returns a copy of the assignment.
+func (a *Assignment) Clone() *Assignment {
+	newAsssignment := *a
+	newAsssignment.Grade.Comments = make([]string, len(a.Grade.Comments))
+	copy(newAsssignment.Grade.Comments, a.Grade.Comments)
+	return &newAsssignment
 }

@@ -52,3 +52,11 @@ func (c *Category) ClearOverride() {
 	c.hasOverride = false
 	c.override = 0.0
 }
+
+// Clone returns a copy of the category.
+func (c *Category) Clone() *Category {
+	newCategory := *c
+	newCategory.Comments = make([]string, len(c.Comments))
+	copy(newCategory.Comments, c.Comments)
+	return &newCategory
+}
